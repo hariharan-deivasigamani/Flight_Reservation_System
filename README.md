@@ -1,4 +1,4 @@
-# H1 Microgenesis
+# Microgenesis
 
 This is project about **ONLINE FLIGHT TICKET RESERVATION SYSTEM**. This project will done using **C++** language.
 
@@ -16,7 +16,7 @@ On 27.6.2023
 
 -    This is my todays work about the project
 
-# H1 OUTPUTS:
+## OUTPUTS:
 
 ![image](https://github.com/hariharan-deivasigamani/Microgenesis/assets/90186237/5c6bd2c1-785b-4f3f-be30-2b40a2558ec6)
 
