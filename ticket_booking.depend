@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1687824175 source:d:\micro\ticket_booking\main.cpp
+	<iostream>
+	<fstream>
+	<iomanip>
+
