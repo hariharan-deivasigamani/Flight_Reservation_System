@@ -256,5 +256,352 @@ public:
         }
     }
 };
+
+
+class passenger: public d_booking,public i_booking
+{
+protected:
+    char f_name[20],l_name[20],email[50];
+    int age,gender;
+    long long int c_no;
+public:
+    void p_detail(int x)
+    {   if(x==1)
+        { j_detail();
+          select_flight();
+        }
+          else
+          {  j_detaili();
+             select_flighti();
+          }
+        cout << "\n\n\nEnter passenger details";
+        cout << "\nFirst Name:";
+        cin >> f_name;
+        cout << "Last Name:";
+        cin >> l_name;
+    }
+    int gender_check()
+    {
+        cout << "\nGender:\nMale-press:1::\nFemale-press:2::";
+        cin >> gender;
+        if(gender>2)
+        {
+            cout << "\n\nWrong input entered.\nTry again\n\n" << endl;
+            return gender_check();
+        }
+    }
+       void more_details()
+       {
+        cout << "Age:";
+        cin >> age;
+        cout << "Email Id:";
+        cin >> email;
+        cout << "Contact no.(10 digits):";
+        cin >>c_no;
+        cout << "\n\nDetails Entered:\n";
+        cout << "Name:" << f_name << " " << l_name << endl;
+        cout << "Gender:" << gender << endl;
+        cout << "Age:" << age << endl;
+        cout << "Email id:" << email << endl;
+        cout << "Contact No.:" << c_no << endl;
+    }
+
+
+     int getpnr()
+        {
+            return pnr;
+        }
+
+     int getpnri()
+     {
+         return pnri;
+     }
+
+     void disp()
+     {
+         cout<<"PNR:" << pnr << endl;
+         cout<<"Flight:" << f_d << endl;
+         cout<<"Name:" << f_name << " " << l_name << endl;
+         cout<<"DOJ:" << doj << endl;
+         cout<<"Departure Time:" << tojd << endl;
+         cout<<"Arrival Time:" << toja;
+     }
+
+      void dispi()
+     {
+         cout<<"PNR:" << pnri << endl;
+         cout<<"Flight:" << f_i << endl;
+         cout<<"Name:" << f_name << " " << l_name << endl;
+         cout<<"DOJ:" << doji << endl;
+         cout<<"Departure Time:" << tojdi << endl;
+         cout<<"Arrival Time:" << tojai;
+     }
+};
+
+
+
+class payment
+{
+protected:
+    long
+    int choice1,bank,card,date,cvv,user_id;
+    char password[10];
+public:
+    void pay_detail()
+    {     cout << "\n\n\nHow would you like to pay?:\n";
+        cout << "\n1.Debit Card(1) \n2.Credit Card(2) \n3.Net Banking(3)";
+        cout << "\n\nEnter your choice";
+        cin >> choice1;
+        switch(choice1)
+        {
+        case 1:
+            cout << "\nEnter card no.:";
+            cin >> card;
+            cout << "\nEnter expiry date:";
+            cin >> date;
+            cout << "\nEnter CVV no.:";
+            cin >> cvv;
+            cout << "\nTransaction Successful\n";
+            break;
+        case 2://condition
+            cout << "\nEnter card no.:";
+            cin >> card;
+            cout << "\nEnter expiry date:";
+            cin >> date;
+            cout << "\nEnter password:";
+            cin >> password;
+            cout << "\nTransaction Successful\n";
+            break;
+        case 3://condition
+            cout << "Banks Available: 1.West Blue Bank(1) 2.Naga Bank(2) 3.Standard Bank(3) 4.Personal Bank(4) 5.Others(5)";
+            cout << "\nSelect your bank:";
+            cin >> bank;
+            cout << "\nYou have selected:" << bank;
+            cout << "\nEnter user id:";
+            cin >> user_id;
+            cout << "\nEnter password:";
+            cin >> password;
+            cout << "\nTransaction Successful\n";
+            break;
+        default://condition
+            cout << "\nWrong input entered.\nTry again\n\n";
+            return pay_detail();
+        }
+    }
+
+};
+
+void createfile(passenger p)
+{  ofstream fin("domestic.txt",ios::binary|ios::app);
+   fin.write((char*)&p,sizeof(p));
+   fin.close();
 }
+
+void cancelticket(int x)
+{  passenger p;
+    int f=0;
+   ifstream fout("domestic.txt",ios::binary|ios::app);
+   ofstream fin("domestic1.txt",ios::binary|ios::app);
+   fout.read((char *)&p,sizeof(p));
+   while(fout)
+   {
+     if(p.getpnr()!=x)
+      fin.write((char *)&p,sizeof(p));
+      else
+     {
+         p.disp();
+         cout<<"\nYour Above ticket is being canceled:\n" << "Amount refunded: $100\n";
+         f++;
+     }
+     fout.read((char *)&p,sizeof(p));
+   }
+   if(f==0)
+    cout<<"Ticket not found\n";
+   fout.close();
+   fin.close();
+   remove("domestic.txt");
+   rename("domestic1.txt","domestic.txt");
+
 }
+
+void checkticket(int x)
+{  passenger p;
+   int f=0;
+   ifstream fout("domestic.txt",ios::binary);
+   fout.read((char *)&p,sizeof(p));
+   while(fout)
+   {
+     if(p.getpnr()==x)
+     {p.disp();
+      cout<<"\nYour ticket"<<endl;
+      f++;
+      break;
+     }
+     fout.read((char *)&p,sizeof(p));
+
+   }
+   fout.close();
+   if(f==0)
+   cout<<"Ticket not found"<<endl;
+
+}
+void createfilei(passenger p)
+{  ofstream fin("international.txt",ios::binary|ios::app);
+   fin.write((char*)&p,sizeof(p));
+   fin.close();
+}
+void cancelticketi(int x)
+{  passenger p;
+   int f=0;
+   ifstream fout("international.txt",ios::binary|ios::app);
+   ofstream fin("international1.txt",ios::binary|ios::app);
+   fout.read((char *)&p,sizeof(p));
+   while(fout)
+   {
+     if(p.getpnri()!=x)
+      fin.write((char *)&p,sizeof(p));
+      else
+     {
+         p.dispi();
+         cout<<"Your Above ticket is being deleted:\n"<<"Amount refunded: $100\n";
+         f++;
+     }
+     fout.read((char *)&p,sizeof(p));
+   }
+   if(f==0)
+    cout<<"\nTicket not found\n";
+   fout.close();
+   fin.close();
+   remove("international.txt");
+   rename("international1.txt","international.txt");
+
+}
+void checkticketi(int x)
+{  passenger p;
+   int f=0;
+   ifstream fout("international.txt",ios::binary);
+   fout.read((char *)&p,sizeof(p));
+   while(fout)
+   {
+     if(p.getpnri()==x)
+     {p.dispi();
+      cout<<"\nYour ticket"<<endl;
+      f++;
+      break;
+     }
+     fout.read((char *)&p,sizeof(p));
+
+   }
+   fout.close();
+   if(f==0)
+   cout<<"Ticket not found"<<endl;
+
+}
+
+
+
+
+int main()
+{
+
+    class d_booking d1;
+    class i_booking i1;
+    class passenger p1;
+    class payment p2;
+    int ch,ch1,n;
+    char input;
+    do
+    {
+    	system("CLS");
+    cout << "\n\n \t\tWelcome To Airline Flight Booking System" << endl << endl;
+
+    cout << "\n\n\t\t\t1.Book Flight(1) \n\t\t\t2.Cancel Fight(2) \n\t\t\t3.Check Ticket(3) \n\t\t\t4.Exit(4)" << endl;
+    cout << "\n\t\t Please enter your choice:";
+    cin >> ch;
+      switch(ch)
+      {
+          case 1:
+          system("CLS");
+              cout << "\n\n1.Domestic Fights(1) \n2.International Flights(2)" << endl;
+              cout << "\nPlease enter your option" << endl;
+              cin >> ch1;
+              switch(ch1)
+              {
+                   case 1:
+                        p1.d_pnr();
+                        p1.p_detail(1);
+                        p1.gender_check();
+                        p1.more_details();
+                        p2.pay_detail();
+                        p1.disp();
+                        createfile(p1);
+                        break;
+                   case 2:
+                           p1.p_detail(2);
+                           p1.i_pnr();
+                           p1.gender_check();
+                           p1.more_details();
+                           p2.pay_detail();
+                           p1.dispi();
+                           createfilei(p1);
+                           break;
+                   default:
+                    cout << "Wrong input entered\nTry again\n\n\n" << endl;
+                    return main();
+              }
+          break;
+          case 2:
+
+              system("CLS");
+              cout << "1.Domestic Fights(1) \n2.International Flights(2)" << endl;
+                 cout << "\nPlease enter your option" << endl;
+                 cin >> ch1;
+                  if(ch1==1)
+                {
+                   cout << "Please enter your PNR no.:" << endl;
+                   cin>>n;
+                   cancelticket(n);
+                }
+                 else if(ch1==2)
+               {  cout << "Please enter your PNR no.:" << endl;
+                  cin>>n;
+                  cancelticketi(n);
+               }
+               else
+               {
+                   cout << "Wrong input entered\nTry again\n\n\n";
+                   return main();
+               }
+               break;
+          case 3:
+          system("CLS");
+                  cout << "1.Domestic Fights(1) \n2.International Flights(2)" << endl;
+                  cout << "\nPlease enter your option" << endl;
+                  cin >> ch1;
+                  if(ch1==1)
+                  {cout << "Please enter your PNR no.:" << endl;
+                  cin>>n;
+                  checkticket(n);}
+                  else if(ch1==2)
+                  {  cout << "Please enter your PNR no.:" << endl;
+                     cin>>n;
+                     checkticketi(n);
+                  }
+                   else
+               {
+                   cout << "Wrong input entered.\nTry again\n\n\n";
+                   return main();
+               }
+               break;
+            case 4:
+			system("CLS");
+			return 0;
+          default:
+            cout << "Wrong input entered\nTry again.\n\n\n\n" << endl;
+            return main();
+      }
+    cout<<"\n\n\nDo you wish to continue:(y/Y)" << endl;
+    cin >> input;
+  }while(input=='Y' || input=='y');
+}
+
