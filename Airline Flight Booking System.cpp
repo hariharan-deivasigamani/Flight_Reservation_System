@@ -1,10 +1,18 @@
 #include <iostream>
 #include<fstream>
 #include<string.h>
+#include<regex>
 using namespace std;
 
 int glob=0;
 int global=10;
+
+bool Emailcheck(string email)
+    {
+    const regex pattern( "[_a-z0-9-]+(.[_gaa-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})");
+    return regex_match(email, pattern);
+    }
+
 
 class d_booking
 {
@@ -12,6 +20,7 @@ protected:
     int pnr;
     char f_d[10],toja[7],tojd[7];
     long int doj;
+    int val1,val2,val3;
     int choice,src,dest;
 public:
     void d_pnr()
@@ -21,13 +30,21 @@ public:
     }
     int j_detail()
     {
-        cout << "\nEnter Date of Flight(DDMMYY)." << "Please enter a valid date." <<  endl;
-        cin >> doj;
+        cout << "\nEnter Date of Flight(DD).\t" <<endl;
+        cin >> val1;
+        cout << "\nEnter Month of Flight(MM).\t" <<endl;
+        cin >> val2;
+        cout << "\nEnter Year of Flight(YY).\t" <<endl;
+        cin >> val3;
+
+        if(val1<=31 && val2<=12 && val3<=24 ){
         cout << "1.New York(1) \t2.New Jersey(2) \t3.Sydney(3) \t4.Los Angeles(4)" << endl << endl;
         cout << "\tEnter Source" << endl;
         cin >> src;
         cout << "\tEnter destination" << endl;
         cin >> dest;
+        }
+
         if((src==1 && dest==2) || (src==2 && dest==1))//condition
         {
             cout << "\t \t \tFlights Found" << endl << endl;
@@ -137,7 +154,7 @@ class i_booking
 protected:
     int pnri;
     char f_i[10],tojai[7],tojdi[7];
-    long int doji;
+    int doji1,doji2,doji3;
     int srci,desti,choicei;
 public:
     void i_pnr()
@@ -148,17 +165,33 @@ public:
 
     int j_detaili()
     {
-        cout << "Enter Date of Flight(DDMMYY)." << "Please enter a valid date." << endl;;
-        cin >> doji;
+
+        cout << "\nEnter Date of Flight(DD).\t" <<endl;
+        cin >> doji1;
+        cout << "\nEnter Month of Flight(MM).\t" <<endl;
+        cin >> doji2;
+        cout << "\nEnter Year of Flight(YY).\t" <<endl;
+        cin >> doji3;
+        if(doji1<=31 && doji2<=12 && doji3 <= 24){
         cout << "1.London(1) \2.Dubai(2) \3.Quatar(3) \4.Singapore(4) \5.Thailand(5) " << endl << endl;
         cout << "\tEnter Source" << endl;
         cin >> srci;
         cout << "\nEnter destination" ;
         cin >> desti;
-        cout << "\t \t \tFlights Found" << endl << endl;
+        }
 
-        if((srci==1 && desti==3) || (srci==3 && desti==1))//condition
+        if((srci==1 && desti==2) || (srci==2 && desti==1))//condition
         {
+            cout << "\t \t \tFlights Found" << endl << endl;
+            cout << "Airline:\tDeparture:\tArrival:\tPrice:\t\tCategory:\n";
+            cout << "1.Speed(1)\t10:00\t\t14:05\t\t$250\tRefundable\n";
+            cout << "2.Zoom(2)\t14:00\t\t18:05\t\t$215\tRefundable\n";
+            cout << "3.Fly Away(3)\t18:00\t\t22:05\t\t$240\tRefundable\n";
+        }
+
+        else if((srci==1 && desti==3) || (srci==3 && desti==1))//condition
+        {
+            cout << "\t \t \tFlights Found" << endl << endl;
             cout << "Airline:\tDeparture:\tArrival:\tPrice:\t\tCategory:\n";
             cout << "1.Speed(1)\t10:00\t\t14:05\t\t$250\tRefundable\n";
             cout << "2.Zoom(2)\t14:00\t\t18:05\t\t$215\tRefundable\n";
@@ -167,14 +200,16 @@ public:
 
         else if((srci==1 && desti==4) || (srci==4 && desti==1))//condition
         {
+            cout << "\t \t \tFlights Found" << endl << endl;
             cout << "Airline:\tDeparture:\tArrival:\tPrice:\t\tCategory:\n";
             cout << "1.Speed(1)\t10:00\t\t14:05\t\t$255\tRefundable\n";
             cout << "2.Zoom(2)\t14:00\t\t18:05\t\t$213\tRefundable\n";
             cout << "3.Fly Away(3)\t18:00\t\t22:05\t\t$246\t\tRefundable\n";
         }
 
-        else if((srci==1 && desti==5) || (srci==5 || desti==1))//condition
+        else if((srci==1 && desti==5) || (srci==5 && desti==1))//condition
         {
+            cout << "\t \t \tFlights Found" << endl << endl;
             cout << "Airline:\tDeparture:\tArrival:\tPrice:\t\tCategory:\n";
             cout << "1.Speed(1)\t10:00\t\t14:05\t\t$250\tRefundable\n";
             cout << "2.Zoom(2)\t14:00\t\t18:05\t\t$290\tRefundable\n";
@@ -183,6 +218,7 @@ public:
 
         else if((srci==2 && desti==3) || (srci==3 && desti==2))//condition
         {
+            cout << "\t \t \tFlights Found" << endl << endl;
             cout << "Airline:\tDeparture:\tArrival:\tPrice:\t\tCategory:\n";
             cout << "1.Speed(1)\t10:00\t\t14:05\t\t$170\tRefundable\n";
             cout << "2.Zoom(2)\t14:00\t\t18:05\t\t$140\tRefundable\n";
@@ -191,6 +227,7 @@ public:
 
         else if((srci==2 && desti==4) || (srci==4 && desti==2))//condition
         {
+            cout << "\t \t \tFlights Found" << endl << endl;
             cout << "Airline:\tDeparture:\tArrival:\tPrice:\t\tCategory:\n";
             cout << "1.Speed(1)\t10:00\t\t14:05\t\t$100\tRefundable\n";
             cout << "2.Zoom(2)\t14:00\t\t18:05\t\t$120\tRefundable\n";
@@ -198,15 +235,49 @@ public:
 
         else if(srci==2 && desti==5 || (srci==5 && desti==2))//condition
         {
+            cout << "\t \t \tFlights Found" << endl << endl;
             cout << "Airline:\tDeparture:\tArrival:\tPrice:\t\tCategory:\n";
             cout << "1.Speed(1)\t10:00\t\t14:05\t\t$140\tRefundable\n";
             cout << "2.Zoom(2)\t14:00\t\t18:05\t\t$120\tRefundable\n";
             cout << "3.Fly Away(3)\t18:00\t\t22:05\t\t$140\tRefundable\n";
 
         }
-        else if(srci==desti)//condition
+
+        else if(srci==3 && desti==4 || (srci==4 && desti==3))//condition
         {
-            cout << "wrong input entered.\nTry again\n\n\n"<< endl;
+            cout << "\t \t \tFlights Found" << endl << endl;
+            cout << "Airline:\tDeparture:\tArrival:\tPrice:\t\tCategory:\n";
+            cout << "1.Speed(1)\t10:00\t\t14:05\t\t$140\tRefundable\n";
+            cout << "2.Zoom(2)\t14:00\t\t18:05\t\t$120\tRefundable\n";
+            cout << "3.Fly Away(3)\t18:00\t\t22:05\t\t$140\tRefundable\n";
+
+        }
+
+        else if(srci==3 && desti==5 || (srci==5 && desti==3))//condition
+        {
+            cout << "\t \t \tFlights Found" << endl << endl;
+            cout << "Airline:\tDeparture:\tArrival:\tPrice:\t\tCategory:\n";
+            cout << "1.Speed(1)\t10:00\t\t14:05\t\t$140\tRefundable\n";
+            cout << "2.Zoom(2)\t14:00\t\t18:05\t\t$120\tRefundable\n";
+            cout << "3.Fly Away(3)\t18:00\t\t22:05\t\t$140\tRefundable\n";
+
+        }
+
+
+        else if(srci==4 && desti==5 || (srci==5 && desti==4))//condition
+        {
+            cout << "\t \t \tFlights Found" << endl << endl;
+            cout << "Airline:\tDeparture:\tArrival:\tPrice:\t\tCategory:\n";
+            cout << "1.Speed(1)\t10:00\t\t14:05\t\t$140\tRefundable\n";
+            cout << "2.Zoom(2)\t14:00\t\t18:05\t\t$120\tRefundable\n";
+            cout << "3.Fly Away(3)\t18:00\t\t22:05\t\t$140\tRefundable\n";
+
+        }
+
+
+        else if(srci == desti)//condition
+        {
+            cout << "Source and Destination can't be same.\nTry again\n\n\n"<< endl;
             return j_detaili();
         }
         else//condition
@@ -224,8 +295,7 @@ public:
         switch(choicei)
         {
         case 1:
-            cout << "\nFlight selected:" <<endl;
-            cout << "Speed" << endl;
+            cout << "\nFlight selected: Speed" <<endl;
             strcpy(f_i,"Speed");
             cout << "Departure Time: 10:00" << endl;
             cout << "Arrival Time: 14:05" << endl;
@@ -233,8 +303,7 @@ public:
             strcpy(tojai,"14:05");
             break;
         case 2:
-               cout << "\nFlight selected:" << endl;
-               cout << "Zoom" << endl;
+               cout << "\nFlight selected: Zoom" << endl;
                strcpy(f_i,"Zoom");
                cout << "Departure Time: 14:00" << endl;
                cout << "Arrival Time: 18:05" << endl;
@@ -242,8 +311,7 @@ public:
                 strcpy(tojai,"18:05");
                 break;
         case 3:
-            cout << "\nFlight selected:" << endl;
-            cout << "Fly Away" << endl;
+            cout << "\nFlight selected: Fly Away" << endl;
             strcpy(f_i,"Fly Away");
             cout << "Departure Time : 18:00" << endl;
             cout << "Arrival Time: 22:05" << endl;
@@ -261,8 +329,9 @@ public:
 class passenger: public d_booking,public i_booking
 {
 protected:
-    char f_name[20],l_name[20],email[50];
-    int age,gender;
+    char f_name[30],l_name[30];
+    string email,email1;
+    int age1,age,gender;
     long long int c_no;
 public:
     void p_detail(int x)
@@ -274,33 +343,72 @@ public:
           {  j_detaili();
              select_flighti();
           }
+
         cout << "\n\n\nEnter passenger details";
-        cout << "\nFirst Name:";
+        cout << "\n\nFirst Name:";
         cin >> f_name;
-        cout << "Last Name:";
+        cout << "\nLast Name:";
         cin >> l_name;
+
+        email:
+        cout << "\nE-mail:";
+        cin >> email1;
+        if (Emailcheck(email1))
+        {
+        email = email1;
+            }
+        else
+        {
+        cout << "\t\t\t Your Email-Id is InValid" << endl;
+         goto email;
+        }
     }
     int gender_check()
     {
-        cout << "\nGender:\nMale-press:1::\nFemale-press:2::";
+        cout << "\nGender:\n\nMale-press:1::\n\nFemale-press:2::";
         cin >> gender;
-        if(gender>2)
+        if( (gender>2) || (gender == 0) )
         {
             cout << "\n\nWrong input entered.\nTry again\n\n" << endl;
             return gender_check();
         }
     }
+
+
+
+    int age_check()
+    {
+        cout << "\nAge:";
+        cin >> age1;
+        if(age1<120){
+            age = age1;
+        }
+        else{
+            cout<<"Enter valid Age\n";
+            return age_check();
+        }
+    }
+
+
        void more_details()
        {
-        cout << "Age:";
-        cin >> age;
-        cout << "Email Id:";
-        cin >> email;
-        cout << "Contact no.(10 digits):";
-        cin >>c_no;
-        cout << "\n\nDetails Entered:\n";
+
+             cout << "\nContact no.(10 digits):";
+             cin >>c_no;
+              if (c_no < 1000000000 || c_no > 9999999999)
+        {
+        cout << "\t\t\t Please Enter Only 10 Digits..." << endl;
+        return more_details();
+        }
+
+
+        cout << "\nDetails Entered:\n";
         cout << "Name:" << f_name << " " << l_name << endl;
-        cout << "Gender:" << gender << endl;
+        if(gender == 1){
+        cout << "Gender: Male"<< endl;
+        }else{
+        cout << "Gender: Female"<< endl;
+        }
         cout << "Age:" << age << endl;
         cout << "Email id:" << email << endl;
         cout << "Contact No.:" << c_no << endl;
@@ -319,22 +427,26 @@ public:
 
      void disp()
      {
-         cout<<"PNR:" << pnr << endl;
-         cout<<"Flight:" << f_d << endl;
-         cout<<"Name:" << f_name << " " << l_name << endl;
-         cout<<"DOJ:" << doj << endl;
-         cout<<"Departure Time:" << tojd << endl;
-         cout<<"Arrival Time:" << toja;
+         cout<<"\n\t\t---------------------------------";
+         cout<<"\n\t\t\t    PNR: " << pnr << "\t" <<endl;
+         cout<<"\t\t|\tFlight: " << f_d << "\t\t|"<< endl;
+         cout<<"\t\t\tName: " << f_name << " " << l_name << "\t\t"<< endl;
+         cout<<"\t\t|\tDOJ: " << val1<<"."<<val2<<"."<<val3 << "\t\t|"<< endl;
+         cout<<"\t\t\tDeparture Time: " << tojd << "\t"<< endl;
+         cout<<"\t\t|\tArrival Time: " << toja <<"\t|"<< endl;
+         cout<<"\t\t---------------------------------";
      }
 
       void dispi()
      {
-         cout<<"PNR:" << pnri << endl;
-         cout<<"Flight:" << f_i << endl;
-         cout<<"Name:" << f_name << " " << l_name << endl;
-         cout<<"DOJ:" << doji << endl;
-         cout<<"Departure Time:" << tojdi << endl;
-         cout<<"Arrival Time:" << tojai;
+       cout<<"\n\t\t---------------------------------";
+         cout<<"\n\t\t\t    PNR: " << pnri << "\t        " <<endl;
+         cout<<"\t\t|\tFlight: " << f_i << "\t\t|"<< endl;
+         cout<<"\t\t\tName: " << f_name << " " << l_name << "\t\t"<< endl;
+         cout<<"\t\t|\tDOJ: " << doji1<<"."<<doji2<<"."<<doji3 << "\t\t|"<< endl;
+         cout<<"\t\t\tDeparture Time:" << tojdi << "\t"<< endl;
+         cout<<"\t\t|\tArrival Time: " << tojai <<"\t|"<< endl;
+         cout<<"\t\t---------------------------------";
      }
 };
 
@@ -343,37 +455,74 @@ public:
 class payment
 {
 protected:
-    long
-    int choice1,bank,card,date,cvv,user_id;
+   long long int choice1,bank;
+   string user_id;
+   unsigned long long int card;
+   int cvv,mon1,year1;
     char password[10];
 public:
     void pay_detail()
     {     cout << "\n\n\nHow would you like to pay?:\n";
-        cout << "\n1.Debit Card(1) \n2.Credit Card(2) \n3.Net Banking(3)";
-        cout << "\n\nEnter your choice";
+        cout << "\n1.Debit Card \n2.Credit Card \n3.Net Banking";
+        cout << "\n\nEnter your choice: ";
         cin >> choice1;
         switch(choice1)
         {
         case 1:
-            cout << "\nEnter card no.:";
+            cout << "\nEnter card no: ";
             cin >> card;
-            cout << "\nEnter expiry date:";
-            cin >> date;
-            cout << "\nEnter CVV no.:";
+
+            if (card < 1000000000000000 || card > 9999999999999999)
+        {
+        cout << "\t\t\t Please Enter Only 16 Digits..." << endl;
+        return pay_detail();
+        }
+
+            cout << "\nEnter Month of Card Expiry(MM):\t" <<endl;
+            cin >> mon1;
+            cout << "\nEnter Year of Card Expiry(YY):\t" <<endl;
+            cin >> year1;
+
+            if(mon1<=12 && (year1<=99 && year1>=23)){
+            cout << "\nEnter CVV no:";
             cin >> cvv;
-            cout << "\nTransaction Successful\n";
+            if(cvv >= 100 && cvv <= 999){
+            cout << "\nThank You For Reservation Your Transaction is Successful\n\n";
+            }
+            else{
+            cout<<"\n !!! Kindly check your Card Details !!!\n";
+            return pay_detail();
+            }
+            }
+            else{
+            cout<<"\n !!! Kindly check your Card Details !!!\n";
+            return pay_detail();
+            }
             break;
         case 2://condition
-            cout << "\nEnter card no.:";
+            cout << "\nEnter card no: ";
             cin >> card;
-            cout << "\nEnter expiry date:";
-            cin >> date;
+
+            if (card < 1000000000000000 || card > 9999999999999999)
+            {
+            cout << "\t\t\t Please Enter Only 16 Digits..." << endl;
+            return pay_detail();
+            }
+            cout << "\nEnter Month of Card Expiry(MM):\t" <<endl;
+            cin >> mon1;
+            cout << "\nEnter Year of Card Expiry(YY):\t" <<endl;
+            cin >> year1;
+            if(mon1<=12 && (year1<=99 && year1>=23)){
             cout << "\nEnter password:";
             cin >> password;
-            cout << "\nTransaction Successful\n";
+            }else{
+            cout<<"\n !!! Kindly check your Card Details !!!\n";
+            return pay_detail();
+            }
+           cout << "\nTransaction Successful\n\n";
             break;
         case 3://condition
-            cout << "Banks Available: 1.West Blue Bank(1) 2.Naga Bank(2) 3.Standard Bank(3) 4.Personal Bank(4) 5.Others(5)";
+            cout << "\n\t\t\tBanks Available: \n\n\t\t\t1.Central Bank of India \n\t\t\t2.State Bank of India \n\t\t\t3.KVB Bank \n\t\t\t4.Indian Bank \n\t\t\t5.Others";
             cout << "\nSelect your bank:";
             cin >> bank;
             cout << "\nYou have selected:" << bank;
@@ -381,7 +530,7 @@ public:
             cin >> user_id;
             cout << "\nEnter password:";
             cin >> password;
-            cout << "\nTransaction Successful\n";
+            cout << "\nTransaction Successful\n\n";
             break;
         default://condition
             cout << "\nWrong input entered.\nTry again\n\n";
@@ -463,7 +612,7 @@ void cancelticketi(int x)
       else
      {
          p.dispi();
-         cout<<"Your Above ticket is being deleted:\n"<<"Amount refunded: $100\n";
+         cout<<"\n\n\t\tYour Above ticket is being deleted:\n"<<"Amount refunded: \"$100\"\n";
          f++;
      }
      fout.read((char *)&p,sizeof(p));
@@ -474,7 +623,6 @@ void cancelticketi(int x)
    fin.close();
    remove("international.txt");
    rename("international1.txt","international.txt");
-
 }
 void checkticketi(int x)
 {  passenger p;
@@ -499,8 +647,6 @@ void checkticketi(int x)
 }
 
 
-
-
 int main()
 {
 
@@ -513,10 +659,11 @@ int main()
     do
     {
     	system("CLS");
-    cout << "\n\n \t\tWelcome To Airline Flight Booking System" << endl << endl;
+    	    cout << "\n\n \t\t\t\t\t\t\t\t       JET AIRWAYS" << endl << endl;
 
-    cout << "\n\n\t\t\t1.Book Flight(1) \n\t\t\t2.Cancel Fight(2) \n\t\t\t3.Check Ticket(3) \n\t\t\t4.Exit(4)" << endl;
-    cout << "\n\t\t Please enter your choice:";
+    cout << "\n\n \t\t\t\t\t\t\tWelcome To AirlineFlight Booking System" << endl << endl;
+    cout << "\n\n\t\t\t\t\t\t\t\t____________________\n\n\t\t\t\t\t\t\t\t     MAIN MENU    \n\t\t\t\t\t\t\t\t____________________\n\n\t\t\t\t\t\t\t\t| 1. Book Flight   |\n\t\t\t\t\t\t\t\t| 2. Cancel Fight  |\n\t\t\t\t\t\t\t\t| 3. Check Ticket  | \n\t\t\t\t\t\t\t\t| 4. Exit          |\n\t\t\t\t\t\t\t\t____________________" << endl;
+    cout << "\n\n\n\t\t\t Please enter your choice:";
     cin >> ch;
       switch(ch)
       {
@@ -531,6 +678,8 @@ int main()
                         p1.d_pnr();
                         p1.p_detail(1);
                         p1.gender_check();
+                        //p1.mail_check();
+                        p1.age_check();
                         p1.more_details();
                         p2.pay_detail();
                         p1.disp();
@@ -540,6 +689,8 @@ int main()
                            p1.p_detail(2);
                            p1.i_pnr();
                            p1.gender_check();
+                            //p1.mail_check();
+                           p1.age_check();
                            p1.more_details();
                            p2.pay_detail();
                            p1.dispi();
@@ -600,8 +751,8 @@ int main()
             cout << "Wrong input entered\nTry again.\n\n\n\n" << endl;
             return main();
       }
-    cout<<"\n\n\nDo you wish to continue:(y/Y)" << endl;
+    cout<<"\n\n\nDo you wish to continue:(y/n)" << endl;
     cin >> input;
-  }while(input=='Y' || input=='y');
+  }while(input=='y');
 }
 
